@@ -1,15 +1,16 @@
-function [per,y,t] = repress_samir()
+function [per, freq, y,t] = repress_samir()
 global n alpha0 alpha beta phi tspan peaktimes
 n = 2.0;
 alpha0 = 0;
 phi = 0.19;
 tspan = [0 2000.0];
-alpha = 5;
-beta = 0;
+% alpha = 10;
+% beta = 1.0;
 y0 = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; ];
 [t,y] = ode45(@eom, tspan, y0);
-[per] = periodfind(y(:,1),t);
-figure(1);clf;hold on
+[per,freq] = periodfind(y(:,1),t);
+
+figure(1);hold on;clf
 plot(t, y(:,1))
 xlabel 'Time'; ylabel 'm1';
 title(sprintf('Concentration of m1 vs. Time a = %0.1f, b = %0.1f', alpha, beta))

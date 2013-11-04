@@ -6,8 +6,9 @@ for r = 1:length(a)
     for c = 1:length(b)
         alpha = a(r);
         beta = b(c);
-        [per, y, t] = repress_samir;
+        [per, freq, y, t] = repress_samir;
         OSCDETECT(r,c) = OSC;
+        FREQDATA(r,c) = freq;
     end
 end
 
