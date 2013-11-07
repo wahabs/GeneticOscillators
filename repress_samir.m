@@ -1,11 +1,11 @@
-function [per, freq, y,t] = repress_samir()
+function [y,t] = repress_samir()
 global n alpha0 alpha beta phi tspan peaktimes
 n = 2.0;
 alpha0 = 0;
 phi = 0.19;
 tspan = [0 2000.0];
-% alpha = 10;
-% beta = 1.0;
+alpha = 10;
+beta = 1;
 y0 = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; ];
 [t,y] = ode45(@eom, tspan, y0);
 [per,freq] = periodfind(y(:,1),t);
