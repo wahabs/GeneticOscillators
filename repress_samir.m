@@ -8,7 +8,7 @@ alpha = 10;
 beta = 1;
 y0 = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; ];
 [t,y] = ode45(@eom, tspan, y0);
-[per,freq] = periodfind(y(:,1),t);
+per = periodfind(y(:,1),t);
 
 figure(1);hold on;clf
 plot(t, y(:,1))
