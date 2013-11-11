@@ -1,19 +1,16 @@
-function [y,t] = repress_samir()
-global n alpha0 alpha beta phi tspan peaktimes
-n = 2.0;
-alpha0 = 0;
-phi = 0.19;
+function [per, y, t] = repress_samir(alpha, beta)
 tspan = [0 2000.0];
-alpha = 10;
-beta = 1;
+
 y0 = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; ];
-[t,y] = ode45(@eom, tspan, y0);
-per = periodfind(y(:,1),t);
+[t,y] = ode45(@eom, tspan, y0, [], alpha, beta);
+%per = periodfind(y(:,1),t);
+freq = freqfind(t, y(:,1), tspan(2));
+per = 1/freq;
 
 figure(1);hold on;clf
 plot(t, y(:,1))
 xlabel 'Time'; ylabel 'm1';
-title(sprintf('Concentration of m1 vs. Time a = %0.1f, b = %0.1f', alpha, beta))
+title(sprintf('Concentration of m1 vs. Time (alpha = %0.1f, beta = %0.1f, f = %0.1f)', alpha, beta, freq))
     
 % figure(2); hold on
 % plot(t, y(:,2), 'Color', rob{i})
@@ -40,14 +37,17 @@ title(sprintf('Concentration of m1 vs. Time a = %0.1f, b = %0.1f', alpha, beta))
 % xlabel 'Time'; ylabel 'p2';
 % title 'Concentration of p2 vs. Time'
 
-function dydt = eom(Time,y)
-global alpha n alpha0 beta phi 
+function dydt = eom(Time,y, alpha, beta)
+%global alpha n alpha0 beta phi
+    alpha0 = 0;
+    phi = 0.19;
+    n = 2.0;
 
-dydt = [(alpha / (1.0 + y(2) ^ n) + alpha0 - y(1));
-        beta*(y(5) - y(2));
-        (alpha/(1.0 + y(4) ^ n) + alpha0 - y(3));
-        beta*(y(1) - phi * y(4));
-        (alpha/(1.0 + y(6) ^ n) + alpha0 - y(5));
-        beta*(y(3) - y(6));
-        ];
+    dydt = [(alpha / (1.0 + y(2) ^ n) + alpha0 - y(1));
+            beta*(y(5) - y(2));
+            (alpha/(1.0 + y(4) ^ n) + alpha0 - y(3));
+            beta*(y(1) - phi * y(4));
+            (alpha/(1.0 + y(6) ^ n) + alpha0 - y(5));
+            beta*(y(3) - y(6));
+            ];
 

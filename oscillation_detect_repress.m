@@ -1,12 +1,13 @@
-global alpha n alpha0 beta phi tspan peaktimes
-a = 0:0.5:50;
-b = 0:0.1:10;
-OSCDETECT = zeros(length(a), length(b));
+a = 0:4:20;
+b = 0:4:20;
+freqs = zeros(length(a), length(b));
 for r = 1:length(a)
     for c = 1:length(b)
         alpha = a(r);
         beta = b(c);
-        [per, y, t] = repress_samir;
+        [per, y, t] = repress_samir(alpha, beta);
+        freqs(r, c) = 1/per;
+        
         if per == tspan(2);
             disp('Not Oscillating')
             OSCDETECT(r,c) = 0;
@@ -22,9 +23,7 @@ for r = 1:length(a)
 end
 
 figure(144);clf
-contourf(b,a,OSCDETECT)
-xlabel('Beta');ylabel('alpha')
-
-OSCDETECT
-        
-
+contourf(b,a,freqs)
+xlabel('Beta');
+ylabel('alpha');
+colorbar;
