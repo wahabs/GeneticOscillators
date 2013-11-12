@@ -5,7 +5,8 @@ function [Y] = plot_periodogram(t,y)
 
   Y = fft(y, nfft);
   Y = Y(1:nfft/2); % throw away second half since it's symmetric
-  Y(1:floor(nfft/500)) = 0; % first number is just the sum of the rest
+  Y(1:floor(nfft/500)) = 0;
+  Y(1) = 0; % first number is just the sum of the rest
 
   n = length(Y);
   power = abs(Y);

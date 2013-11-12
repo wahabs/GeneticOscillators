@@ -6,7 +6,8 @@ function freq = freqfind(t, y, tspan)
   Y = Y(1:nfft/2); % throw away second half, since it's symmetric
 
   % zero out 1/500th of data so it doesn't get counted
-  Y(1:floor(nfft/500)) = 0;
+  zero_pt = floor(nfft/500);
+  Y(1:zero_pt) = 0;
 
   n = length(Y);
   power = abs(Y);
