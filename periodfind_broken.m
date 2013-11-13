@@ -1,7 +1,10 @@
 function [per, freq] = periodfind(y,t)
 global alpha beta tspan peaktimes OSC
-[p, l] = findpeaks(y(:,1), 'THRESHOLD', 0.000);
-[rp,rl] = findpeaks(-y(:,1), 'THRESHOLD', 0.000);
+cutoff = find(t==t(ceil(length(t).*0.05)));
+y1 = y(cutoff:end,1);
+t1 = t(cutoff:end,1);
+[p, l] = findpeaks(y1, 'THRESHOLD', 0.000);
+[rp,rl] = findpeaks(-y1, 'THRESHOLD', 0.000);
 if isempty(p)
     DEBUG = 'NO PEAKS';
 elseif length(p) == 1

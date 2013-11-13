@@ -1,34 +1,24 @@
 function [y, t, per] = smolon_rob()
-global alpha sigma z gamma_x gamma_y tauy peaktimes tspan
-a = [0.44 2.22];
+%global sigma tauy gamma_x gamma_y alpha
+% a = [0.44 2.22];
 alpha = 11.0;
 sigma = 1.5;
 gamma_x = .105;
 gamma_y = .036;
 tauy = 10000;
-z = 0:5;
-tspan = [20000 400000.0];
+tspan = [20000.0 400000.0];
 y0 = [0.0; 0.0];
-rob = {'r','b'};
-c = 0;
-%pause on
-if c == 0
-    figure(1);clf
-    figure(2);clf
-end
-sigma = a(1);
-[t,y] = ode45(@eom, tspan, y0);
+[t,y] = ode45(@smolon_ODE, tspan, y0, [], sigma, tauy, gamma_x, gamma_y, alpha);
 
 figure(1);
 plot(t, y(:,1), 'r')
 xlabel 'Time'; ylabel '[x]';
-title(sprintf('[x] vs. Time, sigma =%0.4f',sigma))
+title '[x] vs. Time'
 
 figure(2);
 plot(t, y(:,2), 'b')
 xlabel 'Time'; ylabel '[y]';
-title(sprintf('[y] vs. Time, sigma =%0.4f',sigma))
-%pause
+title '[y] vs. Time'
     
 [per] = periodfind(y(:,2),t);
 if per > 0.05*tspan(2) && peaktimes(length(peaktimes)-1) <= peaktimes(end)-1.5*per
@@ -36,14 +26,6 @@ if per > 0.05*tspan(2) && peaktimes(length(peaktimes)-1) <= peaktimes(end)-1.5*p
 elseif peaktimes(length(peaktimes)-1) >= peaktimes(end)-1.5*per
     fprintf('Oscillating with Period %0.4f \n and frequency %0.4e\n', per, 1/per)
 end
-
-
-function ddt = eom(Time,y)
-global alpha sigma z gamma_x gamma_y tauy
-
-ddt = [(1 + y(1)^2 + alpha * sigma * y(1)^4) / ((1 + y(1)^2 + sigma * y(1)^4) * (1 + y(2)^4)) - gamma_x * y(1);
-       ((1 + y(1)^2 + alpha * sigma * y(1)^4) / ((1 + y(1)^2 + sigma * y(1)^4) * (1 + y(2)^4)) - gamma_y * y(2)) / tauy;
-        ];
 
 %currently altering tauy.  I will record here the ratios of tauy amplitude
 %to total amplitude of y.

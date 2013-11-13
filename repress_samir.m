@@ -1,53 +1,41 @@
-function [per, y, t] = repress_samir(alpha, beta)
+function [y, t, per] = repress_samir()
 tspan = [0 2000.0];
-
+alpha = 250.0;
+beta = 0.2;
+alpha0 = 0.0;
+n = 2.0;
 y0 = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; ];
-[t,y] = ode45(@eom, tspan, y0, [], alpha, beta);
-%per = periodfind(y(:,1),t);
-freq = freqfind(t, y(:,1), tspan(2));
-per = 1/freq;
+[t,y] = ode45(@repressilator_ODE, tspan, y0, [], alpha, beta, alpha0, n);
+% per = periodfind(y(:,1),t);
+% freq = freqfind(t, y(:,1), tspan(2));
+% per = 1/freq;
 
 figure(1);hold on;clf
-plot(t, y(:,1))
+plot(t, y(:,1), 'b')
 xlabel 'Time'; ylabel 'm1';
-title(sprintf('Concentration of m1 vs. Time (alpha = %0.1f, beta = %0.1f, f = %0.1f)', alpha, beta, freq))
+title 'Concentration of m1 vs. Time'
     
-% figure(2); hold on
-% plot(t, y(:,2), 'Color', rob{i})
-% xlabel 'Time'; ylabel 'p3';
-% title 'Concentration of p3 vs. Time'
-% 
-% figure(3); hold on
-% plot(t, y(:,3), 'Color', rob{i})
-% xlabel 'Time'; ylabel 'm2';
-% title 'Concentration of m2 vs. Time'
-% 
-% figure(4); hold on
-% plot(t, y(:,4), 'Color', rob{i})
-% xlabel 'Time'; ylabel 'p1';
-% title 'Concentration of p1 vs. Time'
-% 
-% figure(5); hold on
-% plot(t, y(:,5), 'Color', rob{i})
-% xlabel 'Time'; ylabel 'm3';
-% title 'Concentration of m3 vs. Time'
-% 
-% figure(6);hold on
-% plot(t, y(:,6), 'Color', rob{i})
-% xlabel 'Time'; ylabel 'p2';
-% title 'Concentration of p2 vs. Time'
+figure(2); hold on;clf
+plot(t, y(:,2), 'Color', 'r')
+xlabel 'Time'; ylabel 'p1';
+title 'Concentration of p1 vs. Time'
 
-function dydt = eom(Time,y, alpha, beta)
-%global alpha n alpha0 beta phi
-    alpha0 = 0;
-    phi = 0.19;
-    n = 2.0;
+figure(3); hold on;clf
+plot(t, y(:,3), 'Color', 'k')
+xlabel 'Time'; ylabel 'm2';
+title 'Concentration of m2 vs. Time'
 
-    dydt = [(alpha / (1.0 + y(2) ^ n) + alpha0 - y(1));
-            beta*(y(5) - y(2));
-            (alpha/(1.0 + y(4) ^ n) + alpha0 - y(3));
-            beta*(y(1) - phi * y(4));
-            (alpha/(1.0 + y(6) ^ n) + alpha0 - y(5));
-            beta*(y(3) - y(6));
-            ];
+figure(4); hold on;clf
+plot(t, y(:,4), 'Color', 'm')
+xlabel 'Time'; ylabel 'p2';
+title 'Concentration of p2 vs. Time'
 
+figure(5); hold on;clf
+plot(t, y(:,5), 'Color', 'g')
+xlabel 'Time'; ylabel 'm3';
+title 'Concentration of m3 vs. Time'
+
+figure(6);hold on;clf
+plot(t, y(:,6), 'Color', 'c')
+xlabel 'Time'; ylabel 'p3';
+title 'Concentration of p3 vs. Time'
