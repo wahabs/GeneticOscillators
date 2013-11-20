@@ -21,3 +21,4 @@ function [freq, t, y] = simulate_goodwin(opt)
     
     % Find oscillation frequency
     freq = freqfind(t, y, params.tspan(2));
+end
