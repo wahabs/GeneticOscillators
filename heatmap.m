@@ -1,4 +1,4 @@
-function heatmap(oscillator, param1, param1_range, param2, param2_range)
+function freqs = heatmap(oscillator, param1, param1_range, param2, param2_range)
     freqs = sensitivity_analysis(oscillator, param1, param1_range, param2, param2_range);
 
     clf;
