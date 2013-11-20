@@ -18,19 +18,21 @@
 % Gamma: Affinity Constant for the positive feedback loop (only used for
 %        x_3)
 
+function dydt = ODE_IRMA(Time, x, alpha1, alpha2, alpha3, alpha4, alpha5,...
+                         v1, v2, v3, v4, v5,...
+                         k1, k2, k3, k4, k5, k6,...
+                         h1, h2, h3, h4, h5, h6, h7,...
+                         d1, d2, d3, d4, d5,...
+                         gamma)
 
+    dydt = [alpha1 + v1.*(k2.^h2)./(k2.^h2 + x(5).^h2) - d1.*x(1);
 
-function dydt = ODE_IRMA(Time, x, alpha, v, k, h, gamma, d)
+            alpha2 + v2.*(x(1).^h3)./(k3.^h3 + x(1).^h3) - d2.*x(2);
 
-dydt = [alpha(1) + v(1).*(k(2).^h(2))./(k(2).^h(2) + x(5).^h(2)) - d(1).*x(1);
-    
-        alpha(2) + v(2).*(x(1).^h(3))./(k(3).^h(3) + x(1).^h(3)) - d(2).*x(2);
-        
-        alpha(3) + v(3).*(x(2).^h(4))./(k(4).^h(4) + (x(2).^h(4)).*(1+x(4).^h(7)./gamma.^h(7)))...
-                 + v(5).*(x(3).^h(6))./(k(6).^h(6) + x(3).^h(6)) - d(3).*x(3);
-                 
-        alpha(4) + v(4).*(x(3).^h(5))./(k(5).^h(5) + x(3).^h(5)) - d(4).*x(4);
-        
-        alpha(5) + v(5).*(x(3).^h(6))./(k(6).^h(6) + x(3).^h(6)) - d(5).*x(5);
+            alpha3 + v3.*(x(2).^h4)./(k4.^h4 + (x(2).^h4).*(1+x(4).^h7./gamma.^h7))...
+                     + v5.*(x(3).^h6)./(k6.^h6 + x(3).^h6) - d3.*x(3);
 
-];
+            alpha4 + v4.*(x(3).^h5)./(k5.^h5 + x(3).^h5) - d4.*x(4);
+
+            alpha5 + v5.*(x(3).^h6)./(k6.^h6 + x(3).^h6) - d5.*x(5);];
+end
