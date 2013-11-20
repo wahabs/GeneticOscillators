@@ -1,6 +1,6 @@
 function freqs = sensitivity_analysis(oscillator, param1, param1_range, param2, param2_range)
 
-    % oscillator: 'repressilator' or 'smolon'
+    % oscillator: 'repressilator' or 'smolon' or 'repressilator_pfl'
     % param1: a parameter you want to vary (ex: 'alpha')
     % param1_range: the range for param1 (ex: [250 300 350])
     % param2, param2_range: same syntax as param1
