@@ -20,7 +20,7 @@
 
 
 
-function dydt = ODE_IRMA(Time,x,alpha,v,k,h,d,gamma)
+function dydt = ODE_IRMA(Time, x, alpha, v, k, h, gamma, d)
 
 dydt = [alpha(1) + v(1).*(k(2).^h(2))./(k(2).^h(2) + x(5).^h(2)) - d(1).*x(1);
     
