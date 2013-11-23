@@ -3,7 +3,7 @@ function freqs = heatmap(oscillator, param1, param1_range, param2, param2_range)
 
     clf;
     figure(1);
-    contourf(param1_range, param2_range, freqs);
+    contourf(param2_range, param1_range, freqs);
     colorbar;
     xlabel(param1);
     ylabel(param2);
