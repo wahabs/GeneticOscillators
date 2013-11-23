@@ -15,7 +15,7 @@ function [freq, t, y] = simulate_repressilator_pfl(opt)
     end
 
     % Run simulation
-    [t, y] = ode45(@ODE_repressilator, params.tspan, params.y0, [], params.alpha, params.beta, params.alpha0, params.n, params.k);
+    [t, y] = ode45(@ODE_repressilator_pfl, params.tspan, params.y0, [], params.alpha, params.beta, params.alpha0, params.n, params.k);
 
     % Find oscillation frequency
     freq = freqfind(t, y, params.tspan(2));
