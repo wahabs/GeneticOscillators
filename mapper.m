@@ -1,7 +1,7 @@
-function mapper(oscillator)
+function mapper(oscillator,mapsize)
 %% Define the variables
 
-mapsize = 3; % Resolution of the heat map
+% mapsize specifies the resolution of the contour plot (mapsize x mapsize)
 
 % Scale factors of the lower and upper bound for each parameter range
 lowbound = 1e-5;
