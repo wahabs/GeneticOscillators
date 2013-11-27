@@ -1,4 +1,4 @@
-function run_sim(num, total_sims)
+function run_parallel_sim(num, total_sims)
     oscillator = 'smolon';
     param1 = 'sigma';
     param1_range = linspace(0, 3*1.5, total_sims);
