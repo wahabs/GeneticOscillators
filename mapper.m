@@ -17,11 +17,13 @@ if strcmp(oscillator,'goodwin')
     
 elseif strcmp(oscillator,'IRMA')
     
-    disp('This feature not yet available')
+    paramset  = {'gamma', 'd3',  'k6','h4','h6'};
+    paramvals = [    0.6, .421, .0477,   1,   4];
     
 elseif strcmp(oscillator,'metabolator')
     
-    disp('This feature not yet available')
+    paramset  = {'k1','k2','k3','Km1','Km2','S0','a2','a3','Kg1'};
+    paramvals = [  80, 0.8, .01, 0.06,  0.1,   1,   2,   2,   10];
    
 elseif strcmp(oscillator,'repressilator')
     
