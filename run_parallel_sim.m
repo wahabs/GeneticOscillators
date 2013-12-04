@@ -13,7 +13,7 @@ function run_parallel_sim(num, total_sims)
 
     freq = eval(sprintf('simulate_%s(struct(param1, param1_val, param2, param2_val))', oscillator));
 
-    fprintf('Completed simulation %i (%s = %g, %s = %g)', num, param1, param1_val, param2, param2_val)
+    fprintf('Completed simulation %i (%s = %g, %s = %g)\n', num, param1, param1_val, param2, param2_val)
     
     save(sprintf('%03i.mat', num), 'freq', 'oscillator', 'param1', 'param1_val', 'param2', 'param2_val');
 end
