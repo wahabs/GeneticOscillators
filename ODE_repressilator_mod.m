@@ -22,7 +22,7 @@ function dydt = ODE_repressilator_mod(Time, y0, alpha, beta, alpha0, n, delta_ma
     dydt = [(alpha0 + alpha./(1.0 + y0(6).^n) - y0(1));
             (beta*delta.*(y0(1) - 0.19.*y0(2)));
             (alpha0 + alpha./(1.0 + y0(2).^n) - y0(3));
-            (beta.*(y0(3) - y0(4)));
+            (beta*delta.*(y0(3) - y0(4)));
             (alpha0 + alpha./(1.0 + y0(4).^n) - y0(5));
-            (beta.*(y0(5) - y0(6)));
+            (beta*delta.*(y0(5) - y0(6)));
             ];
